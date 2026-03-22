@@ -3,10 +3,11 @@ spring:
     name: anime_assistant
 
 langchain4j:
-  dashscope:
-    chat-model:
-      api-key:
+  community:
+   dashscope:
+     chat-model:
       model-name: qwen-vl-plus
       temperature: 0.7
       timeout: 60000
       max-tokens: 2048
+      api-key: sk-f9c7ae353c7541f8997e4f4c1c5fc4a7

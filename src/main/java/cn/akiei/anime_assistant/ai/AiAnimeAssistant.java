@@ -2,7 +2,7 @@ package cn.akiei.anime_assistant.ai;
 
 import dev.langchain4j.data.message.SystemMessage;
 import dev.langchain4j.data.message.UserMessage;
-import dev.langchain4j.model.chat.ChatLanguageModel;
+import dev.langchain4j.model.chat.ChatModel;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
 public class AiAnimeAssistant {
 
     //ChatModel 构造注入（生产）
-    private final ChatLanguageModel qwenChatModel;
+    private final ChatModel qwenChatModel;
 
-    public AiAnimeAssistant(ChatLanguageModel qwenChatModel) {
+    public AiAnimeAssistant(ChatModel qwenChatModel) {
         this.qwenChatModel = qwenChatModel;
     }
 
@@ -82,11 +82,10 @@ public class AiAnimeAssistant {
         try {
             var systemMessage = SystemMessage.from(SYSTEM_MESSAGE);
             var userMessage = UserMessage.from(message.trim());
-            var response = qwenChatModel.generate(systemMessage, userMessage);
-            var aiMessage = response.content();
-            var aiReply = aiMessage.text();
+            var response = qwenChatModel.chat(systemMessage, userMessage).aiMessage();
 
-            return Optional.ofNullable(aiReply);
+            //log.info("AI 返回:" + response.toString());
+            return Optional.ofNullable(response.text());
         } catch (Exception e) {
             log.error("文本对话调用失败", e);
             return Optional.of("error");
@@ -105,8 +104,8 @@ public class AiAnimeAssistant {
             return Optional.empty();
         }
         try {
-            var response = qwenChatModel.generate(userMessage);
-            var aiMessage = response.content();
+            var response = qwenChatModel.chat(userMessage);
+            var aiMessage = response.aiMessage();
             var aiReply = aiMessage == null ? null : aiMessage.text();
 
             return Optional.ofNullable(aiReply);
