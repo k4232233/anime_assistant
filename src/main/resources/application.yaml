@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: langchain4j_demo
+
+langchain4j:
+  dashscope:
+    chat-model:
+      api-key: sk-f9c7ae353c7541f8997e4f4c1c5fc4a7
+      model-name: qwen-vl-plus
+      temperature: 0.7 # 回答随机性
+      timeout: 60000 # 图片解析超时时间（30秒）
+      max-tokens: 2048 # 最大生成token数
