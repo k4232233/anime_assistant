@@ -1,4 +1,4 @@
-package cn.akiei.langchain4j_demo.ai;
+package cn.akiei.anime_assistant.ai;
 
 import dev.langchain4j.data.message.SystemMessage;
 import dev.langchain4j.data.message.UserMessage;

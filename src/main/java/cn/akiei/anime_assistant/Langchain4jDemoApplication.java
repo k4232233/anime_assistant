@@ -1,4 +1,4 @@
-package cn.akiei.langchain4j_demo;
+package cn.akiei.anime_assistant;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
